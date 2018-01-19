@@ -43,9 +43,7 @@ setup(
         'qrcode',
         'protobuf',
         'dnspython',
-        'jsonrpclib-pelix',
-        'PySocks>=1.6.6',
-        'pyaes>=0.1a1',
+        'jsonrpclib',
     ],
     packages=[
         'electrum',
