@@ -1,3 +1,10 @@
+# Release 2.6.3 : (Security update)
+ * Fix a vulnerability caused by Cross Origin Resource Sharing (CORS)
+   in the JSONRPC interface. Previous versions of Electrum are
+   vulnerable to port scanning and daenomization attacks from
+   malicious websites. Wallets that are not password-protected are 
+   vulnerable to theft.
+
 # Release 2.6.2 (bugfixes)
  * fix Trustedcoin restore from seed (bug #1704)
  * small improvements to kivy GUI
