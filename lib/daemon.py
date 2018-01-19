@@ -29,7 +29,7 @@ import sys
 import time
 
 import jsonrpclib
-from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer, SimpleJSONRPCRequestHandler
+from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 
 from network import Network
 from util import json_decode, DaemonThread
@@ -82,21 +82,6 @@ def get_server(config):
         # Sleep a bit and try again; it might have just been started
         time.sleep(1.0)
 
-
-
-class RequestHandler(SimpleJSONRPCRequestHandler):
-
-    def do_OPTIONS(self):
-        self.send_response(200)
-        self.end_headers()
-
-    def end_headers(self):
-        self.send_header("Access-Control-Allow-Headers",
-                         "Origin, X-Requested-With, Content-Type, Accept")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        SimpleJSONRPCRequestHandler.end_headers(self)
-
-
 class Daemon(DaemonThread):
 
     def __init__(self, config, fd):
@@ -114,8 +99,7 @@ class Daemon(DaemonThread):
         cmd_runner = Commands(self.config, None, self.network)
         host = config.get('rpchost', 'localhost')
         port = config.get('rpcport', 0)
-        server = SimpleJSONRPCServer((host, port), logRequests=False,
-                                     requestHandler=RequestHandler)
+        server = SimpleJSONRPCServer((host, port), logRequests=False)
         os.write(fd, repr((server.socket.getsockname(), time.time())))
         os.close(fd)
         server.timeout = 0.1
