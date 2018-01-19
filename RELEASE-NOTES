@@ -4,6 +4,7 @@
    vulnerable to port scanning and daenomization attacks from
    malicious websites. Wallets that are not password-protected are 
    vulnerable to theft.
+ * Password-protect the JSON RPC interface
 
 # Release 2.6.2 (bugfixes)
  * fix Trustedcoin restore from seed (bug #1704)
