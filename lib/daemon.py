@@ -29,8 +29,9 @@ import sys
 import time
 
 import jsonrpclib
-from .jsonrpc import VerifyingJSONRPCServer
+from jsonrpc import VerifyingJSONRPCServer
 
+from version import ELECTRUM_VERSION
 from network import Network
 from util import json_decode, DaemonThread
 from util import print_msg, print_error, print_stderr, to_string
@@ -106,7 +107,7 @@ def get_rpc_credentials(config):
         from .util import print_stderr
         print_stderr('WARNING: RPC authentication is disabled.')
     return rpc_user, rpc_password
-        
+
 class Daemon(DaemonThread):
 
     def __init__(self, config, fd):
@@ -122,9 +123,12 @@ class Daemon(DaemonThread):
         self.wallets = {}
         # Setup server
         cmd_runner = Commands(self.config, None, self.network)
+        self.init_server(config, fd)
+
+    def init_server(self, config, fd):
         host = config.get('rpchost', 'localhost')
         port = config.get('rpcport', 0)
-        rpc_user, rpc_password = get_rpc_credentials(config)
+        #rpc_user, rpc_password = get_rpc_credentials(config)
         try:
             server = VerifyingJSONRPCServer((host, port), logRequests=False,
                                             rpc_user=rpc_user, rpc_password=rpc_password)
@@ -133,7 +137,6 @@ class Daemon(DaemonThread):
             self.server = None
             os.close(fd)
             return
-        
         os.write(fd, repr((server.socket.getsockname(), time.time())))
         os.close(fd)
         server.timeout = 0.1
