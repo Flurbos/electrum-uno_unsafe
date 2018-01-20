@@ -27,7 +27,7 @@ from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer, SimpleJSONRPCReq
 from base64 import b64decode
 import time
 
-from . import util
+import util
 
 
 class RPCAuthCredentialsInvalid(Exception):
@@ -48,10 +48,12 @@ class RPCAuthUnsupportedType(Exception):
 # based on http://acooke.org/cute/BasicHTTPA0.html by andrew cooke
 class VerifyingJSONRPCServer(SimpleJSONRPCServer):
 
-    def __init__(self, rpc_user, rpc_password, *args, **kargs):
+    def __init__(self, *args, **kargs):
 
-        self.rpc_user = rpc_user
-        self.rpc_password = rpc_password
+        self.rpc_user = args[sizeof(args)-1]
+	#rpc_user
+        self.rpc_password = args[sizeof(args)]
+	#rpc_password
 
         class VerifyingRequestHandler(SimpleJSONRPCRequestHandler):
             def parse_request(myself):
@@ -71,7 +73,7 @@ class VerifyingJSONRPCServer(SimpleJSONRPCServer):
                 return False
 
         SimpleJSONRPCServer.__init__(
-            self, *args, requestHandler=VerifyingRequestHandler, **kargs)
+            self, requestHandler=VerifyingRequestHandler, *args, **kargs)
 
     def authenticate(self, headers):
         if self.rpc_password == '':

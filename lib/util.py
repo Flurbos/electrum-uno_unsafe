@@ -355,7 +355,7 @@ def parse_URI(uri, on_pr=None):
 
     if ':' not in uri:
         if not bitcoin.is_address(uri):
-            raise BaseException("Not a bitcoin address")
+            raise BaseException("Not a unobtanium address")
         return {'address': uri}
 
     u = urlparse.urlparse(uri)

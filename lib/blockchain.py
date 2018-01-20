@@ -36,7 +36,7 @@ class Blockchain(util.PrintError):
     def __init__(self, config, network):
         self.config = config
         self.network = network
-        self.headers_url = "https://cryptap.us/uno/electrum/blockchain_headers"
+        self.headers_url = "https://unobtanium.uno/electrum/blockchain_headers"
         self.local_height = 0
         self.set_local_height()
 

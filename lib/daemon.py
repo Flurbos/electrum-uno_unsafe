@@ -103,10 +103,10 @@ def get_rpc_credentials(config):
         config.set_key('rpcuser', rpc_user)
         config.set_key('rpcpassword', rpc_password, save=True)
     elif rpc_password == '':
-        from .util import print_stderr
+        from util import print_stderr
         print_stderr('WARNING: RPC authentication is disabled.')
     return rpc_user, rpc_password
-        
+
 class Daemon(DaemonThread):
 
     def __init__(self, config, fd):
@@ -126,8 +126,8 @@ class Daemon(DaemonThread):
         port = config.get('rpcport', 0)
         rpc_user, rpc_password = get_rpc_credentials(config)
         try:
-            server = VerifyingJSONRPCServer((host, port),
-                                            rpc_user=rpc_user, rpc_password=rpc_password, logRequests=False)
+            server = VerifyingJSONRPCServer((host, port), logRequests=False,
+                                            rpc_user=rpc_user, rpc_password=rpc_password)
         except Exception as e:
             self.print_error('Warning: cannot initialize RPC server on host', host, e)
             self.server = None
