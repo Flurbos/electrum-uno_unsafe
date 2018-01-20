@@ -50,9 +50,9 @@ class VerifyingJSONRPCServer(SimpleJSONRPCServer):
 
     def __init__(self, *args, **kargs):
 
-        self.rpc_user = args[sizeof(args)-1]
+        self.rpc_user = args[1]
 	#rpc_user
-        self.rpc_password = args[sizeof(args)]
+        self.rpc_password = args[sizeof(2)]
 	#rpc_password
 
         class VerifyingRequestHandler(SimpleJSONRPCRequestHandler):
