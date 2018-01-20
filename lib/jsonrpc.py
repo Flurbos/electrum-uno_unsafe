@@ -52,7 +52,7 @@ class VerifyingJSONRPCServer(SimpleJSONRPCServer):
 
         self.rpc_user = args[1]
 	#rpc_user
-        self.rpc_password = args[sizeof(2)]
+        self.rpc_password = args[2]
 	#rpc_password
 
         class VerifyingRequestHandler(SimpleJSONRPCRequestHandler):

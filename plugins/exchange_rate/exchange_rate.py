@@ -87,6 +87,13 @@ class ExchangeBase(PrintError):
     def historical_rate(self, ccy, d_t):
         return self.history.get(ccy, {}).get(d_t.strftime('%Y-%m-%d'))
 
+class Coinmarketcap(ExchangeBase):
+    def get_rates(self, ccy):
+        json = self.get_json('api.coinmarketcap.com', '/v1/ticker/unobtanium')
+        return {'USD': Decimal(json[0]['price_usd'])}
+
+"""
+
 class cryptapus(ExchangeBase):
     def get_rates(self, ccy):
         quote_currencies = {}
@@ -95,7 +102,7 @@ class cryptapus(ExchangeBase):
             quote_currencies[str(cur)] = Decimal(json[cur]['last'])
         return quote_currencies
 
-"""
+
 class BitcoinAverage(ExchangeBase):
     def get_rates(self, ccy):
         json = self.get_json('api.bitcoinaverage.com', '/ticker/global/all')
