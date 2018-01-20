@@ -29,7 +29,7 @@ import sys
 import time
 
 import jsonrpclib
-from .jsonrpc import VerifyingJSONRPCServer
+from jsonrpc import VerifyingJSONRPCServer
 
 from network import Network
 from util import json_decode, DaemonThread
@@ -126,14 +126,13 @@ class Daemon(DaemonThread):
         port = config.get('rpcport', 0)
         rpc_user, rpc_password = get_rpc_credentials(config)
         try:
-            server = VerifyingJSONRPCServer((host, port), logRequests=False,
-                                            rpc_user=rpc_user, rpc_password=rpc_password)
+            server = VerifyingJSONRPCServer((host, port),
+                                            rpc_user=rpc_user, rpc_password=rpc_password, logRequests=False)
         except Exception as e:
             self.print_error('Warning: cannot initialize RPC server on host', host, e)
             self.server = None
             os.close(fd)
             return
-        
         os.write(fd, repr((server.socket.getsockname(), time.time())))
         os.close(fd)
         server.timeout = 0.1
@@ -144,6 +143,8 @@ class Daemon(DaemonThread):
         server.register_function(self.run_daemon, 'daemon')
         server.register_function(self.run_gui, 'gui')
         self.server = server
+        server.timeout = 0.1
+        server.register_function(self.ping, 'ping')
 
     def ping(self):
         return True
@@ -231,7 +232,7 @@ class Daemon(DaemonThread):
 
     def run(self):
         while self.is_running():
-            self.server.handle_request()
+            self.server.handle_request() if self.server else time.sleep(0.1)
         for k, wallet in self.wallets.items():
             wallet.stop_threads()
         if self.network:

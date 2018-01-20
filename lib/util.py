@@ -202,7 +202,13 @@ def profiler(func):
         return o
     return lambda *args, **kw_args: do_profile(func, args, kw_args)
 
-
+def to_string(x, enc):
+    if isinstance(x, (bytes, bytearray)):
+       return x.decode(enc)
+    if isinstance(x, str):
+       return x
+    else:
+       raise TypeError("Not a string or bytes like object")
 
 def user_dir():
     if "HOME" in os.environ:
