@@ -30,7 +30,7 @@ import re
 import hmac
 
 import version
-from util import print_error, InvalidPassword
+from util import print_error, InvalidPassword, to_bytes
 
 import ecdsa
 import aes

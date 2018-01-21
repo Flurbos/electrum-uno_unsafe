@@ -186,6 +186,19 @@ def json_decode(x):
     except:
         return x
 
+def to_bytes(something, encoding='utf8'):
+    """
+    cast string to bytes() like object, but for python2 support it's bytearray copy
+    """
+    if isinstance(something, bytes):
+        return something
+    if isinstance(something, str):
+        return something.encode(encoding)
+    if isinstance(something, bytearray):
+        return bytes(something)
+    else:
+        raise TypeError("Not a string or bytes like object")
+
 # taken from Django Source Code
 def constant_time_compare(val1, val2):
     """Return True if the two strings are equal, False otherwise."""

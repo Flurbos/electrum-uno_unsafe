@@ -45,8 +45,13 @@ from version import ELECTRUM_VERSION, PROTOCOL_VERSION
 DEFAULT_PORTS = {'t':'50005', 's':'50006', 'h':'8005', 'g':'8006'}
 
 DEFAULT_SERVERS = {
-    'kraken.cryptap.us':{'t':'50005', 's':'50006'},
-    'cetus.cryptap.us':{'t':'50005', 's':'50006'},
+    'electrum1.unobtanium.uno':{'t':'50005', 's':'50006'},
+    'electrum2.unobtanium.uno':{'t':'50005', 's':'50006'},
+    'node1.unobtanium.uno':{'t':'50005', 's':'50006'},
+    'node2.unobtanium.uno':{'t':'50005', 's':'50006'},
+    'nigeria1.unobtanium.uno':{'t':'50005', 's':'50006'},
+    'nigeria2.unobtanium.uno':{'t':'50005', 's':'50006'},
+
 }
 
 NODES_RETRY_INTERVAL = 60

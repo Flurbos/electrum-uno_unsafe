@@ -32,6 +32,7 @@ import jsonrpclib
 from jsonrpc import VerifyingJSONRPCServer
 
 from network import Network
+from util import to_bytes
 from util import json_decode, DaemonThread
 from util import print_msg, print_error, print_stderr, to_string
 from wallet import WalletStorage, Wallet
@@ -88,6 +89,10 @@ def get_server(config):
         # Sleep a bit and try again; it might have just been started
         time.sleep(1.0)
 
+
+def tobytes(n, length):
+    return ''.join(chr((n >> i*8) & 0xff) for i in reversed(range(length)))
+
 def get_rpc_credentials(config):
     rpc_user = config.get('rpcuser', None)
     rpc_password = config.get('rpcpassword', None)
@@ -97,8 +102,10 @@ def get_rpc_credentials(config):
         bits = 128
         nbytes = bits // 8 + (bits % 8 > 0)
         pw_int = ecdsa.util.randrange(pow(2, bits))
-        pw_b64 = base64.b64encode(
-            pw_int.to_bytes(nbytes, 'big'), b'-_')
+        #valuex = ('%%0%dx' % (nbytes << 1) % pw_int).decode('hex')[-nbytes:] '\x00\x00\x00\x00\x00\x00\x07[\xcd\x15'
+        valuex = tobytes(pw_int, nbytes)
+        pw_b64 = base64.b64encode(valuex, b'-_')
+#            pw_int.to_bytes(nbytes, 'big'), b'-_')
         rpc_password = to_string(pw_b64, 'ascii')
         config.set_key('rpcuser', rpc_user)
         config.set_key('rpcpassword', rpc_password, save=True)
