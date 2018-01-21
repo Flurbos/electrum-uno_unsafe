@@ -4,6 +4,7 @@
 build/
 dist/
 *.egg/
+contrib/build-wine/tmp/*
 /electrum.py
 contrib/pyinstaller/
 Electrum_uno.egg-info/
