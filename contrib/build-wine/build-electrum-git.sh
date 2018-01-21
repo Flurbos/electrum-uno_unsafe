@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # You probably need to update only this link
-ELECTRUM_GIT_URL=git://github.com/cryptapus/electrum-uno.git
+ELECTRUM_GIT_URL=git://github.com/flurbos/electrum-uno.git
 BRANCH=master
 NAME_ROOT=electrum-uno
 
