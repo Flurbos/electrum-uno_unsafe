@@ -36,7 +36,7 @@ setup(
     name="Electrum_uno",
     version=version.ELECTRUM_VERSION,
     install_requires=[
-        'slowaes>=0.1a1',
+        'pyaes',
         'ecdsa>=0.9',
         'pbkdf2',
         'requests',
@@ -73,15 +73,15 @@ setup(
         'electrum': [
             'www/index.html',
             'wordlist/*.txt',
-            'locale/*/LC_MESSAGES/electrum.mo',
+            'locale/*/LC_MESSAGES/electrum-uno.mo',
         ]
     },
     scripts=['electrum'],
     data_files=data_files,
-    description="Lightweight Bitcoin Wallet",
+    description="Lightweight Unobtanium Wallet",
     author="Thomas Voegtlin",
     author_email="thomasv@electrum.org",
     license="MIT Licence",
     url="https://electrum.org",
-    long_description="""Lightweight Bitcoin Wallet"""
+    long_description="""Lightweight Unobtanium Wallet"""
 )
