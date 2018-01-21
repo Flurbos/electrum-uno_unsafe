@@ -1,4 +1,7 @@
 ####-*.patch
+*.tok
+*.pkg
+*.manifest
 *.pyc
 *.swp
 *.exe
