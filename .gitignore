@@ -2,6 +2,7 @@
 *.tok
 *.pkg
 *.manifest
+*.tar.gz
 *.pyc
 *.swp
 *.exe
