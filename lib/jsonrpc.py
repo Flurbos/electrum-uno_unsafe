@@ -48,11 +48,13 @@ class RPCAuthUnsupportedType(Exception):
 # based on http://acooke.org/cute/BasicHTTPA0.html by andrew cooke
 class VerifyingJSONRPCServer(SimpleJSONRPCServer):
 
-    def __init__(self, *args,  **kwargs):
+    def __init__(self, rpc_user, rpc_password, *args, **kwargs):
 
-        self.rpc_user = args[1]
+        self.rpc_user = rpc_user
+        #args[1]
 	#rpc_user
-        self.rpc_password = args[2]
+        self.rpc_password = rpc_password
+        #args[2]
 	#rpc_password
 
         class VerifyingRequestHandler(SimpleJSONRPCRequestHandler):
