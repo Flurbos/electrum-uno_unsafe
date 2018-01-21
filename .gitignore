@@ -1,9 +1,14 @@
 ####-*.patch
 *.pyc
 *.swp
+*.exe
+*.zip
+*.msi
 build/
 dist/
 *.egg/
+electrum-git
+trezor-git
 contrib/build-wine/tmp/*
 /electrum.py
 contrib/pyinstaller/
