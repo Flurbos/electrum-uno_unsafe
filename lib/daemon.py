@@ -89,10 +89,6 @@ def get_server(config):
         # Sleep a bit and try again; it might have just been started
         time.sleep(1.0)
 
-
-def tobytes(n, length):
-    return ''.join(chr((n >> i*8) & 0xff) for i in reversed(range(length)))
-
 def get_rpc_credentials(config):
     rpc_user = config.get('rpcuser', None)
     rpc_password = config.get('rpcpassword', None)
@@ -102,9 +98,7 @@ def get_rpc_credentials(config):
         bits = 128
         nbytes = bits // 8 + (bits % 8 > 0)
         pw_int = ecdsa.util.randrange(pow(2, bits))
-        #valuex = tobytes(pw_int, nbytes)
         pw_b64 = base64.b64encode(
-	#= base64.b64encode(valuex, b'-_')
             to_bytes(pw_int, nbytes, 'big'), b'-_')
         rpc_password = to_string(pw_b64, 'ascii')
         config.set_key('rpcuser', rpc_user)
