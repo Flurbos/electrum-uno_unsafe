@@ -1,4 +1,4 @@
-WARNING: currently not maintained
+WARNING: Currently in development
 =====================================
 Unobtanium Electrum - Lightweight Unobtanium client
 =====================================
