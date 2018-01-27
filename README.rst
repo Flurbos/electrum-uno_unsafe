@@ -90,7 +90,7 @@ Creating Binaries
 
 In oder to creating binaries, you must create the 'packages' directory::
 
-    ./contrib/pake_packages
+    ./contrib/make_packages
 
 
 Mac OS X
@@ -108,10 +108,13 @@ Mac OS X
 Windows
 -------
 
-see contrib/build-wine/README
+**Currently needs attention, is a work in progress**    
 
+see contrib/build-wine/README
 
 Android
 -------
+
+**Currently needs attention, is a work in progress**    
 
 see gui/kivy/Readme.txt
