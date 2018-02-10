@@ -99,7 +99,8 @@ def get_rpc_credentials(config):
         nbytes = bits // 8 + (bits % 8 > 0)
         pw_int = ecdsa.util.randrange(pow(2, bits))
         pw_b64 = base64.b64encode(
-            to_bytes(pw_int, nbytes, 'big'), b'-_')
+             ('%%0%dx' % (nbytes << 1) % pw_int).decode('hex')[-nbytes:], b'-_')
+        #    pw_int.to_bytes(nbytes, byteorder='big'), b'-_')
         rpc_password = to_string(pw_b64, 'ascii')
         config.set_key('rpcuser', rpc_user)
         config.set_key('rpcpassword', rpc_password, save=True)

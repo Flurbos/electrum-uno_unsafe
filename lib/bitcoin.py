@@ -28,7 +28,7 @@ import hashlib
 import base64
 import re
 import hmac
-
+import os
 import version
 from util import print_error, InvalidPassword, to_bytes
 
