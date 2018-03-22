@@ -73,7 +73,7 @@ setup(
         'electrum': [
             'www/index.html',
             'wordlist/*.txt',
-            'locale/*/LC_MESSAGES/electrum-uno.mo',
+            'locale/*/LC_MESSAGES/electrum.mo',
         ]
     },
     scripts=['electrum'],
